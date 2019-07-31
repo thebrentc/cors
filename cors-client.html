@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CORS client</title>
+</head>
+<body>
+    <h1>CORS client</h1>
+    <form>
+        <label for="url">URL:</label>&nbsp;<input type="text" name="url" id="url" size="40">    
+        &nbsp;     
+        <select name="method" id="method">
+            <option value="POST">POST</option>
+            <option value="GET">GET</option>
+        </select>
+        <input type="submit" name="submit" value="submit" onclick="javascript:ajax(); event.preventDefault();"/>
+    </form>
+    <div id="response"></div>
+    <script>
+    function ajax() {
+        document.getElementById("response").innerHTML = '';            
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("response").innerHTML = "<h2>Response:</h2>"+this.status+" "+xhttp.responseText;
+            }
+        };
+        xhttp.open(document.getElementById('method').value, document.getElementById('url').value, true);
+        xhttp.send();
+    }
+    </script>
+</body>
+</html>
